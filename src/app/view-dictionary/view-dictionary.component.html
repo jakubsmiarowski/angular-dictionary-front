@@ -1,1 +1,17 @@
-<p>view-dictionary works!</p>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="input-group mb-3" ngModelGroup="userData">
+        <input type="text" class="form-control" placeholder="Search for dictionary" required name="dictionary" id="dictionary" ngModel>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </div>
+    <label for="type">Select Type</label>
+    <select id="type" class="form-control" name="type" ngModel required>
+    <option value="AbsenceType">AbsenceType</option>
+  </select>
+</form>
+<div *ngIf="submitted" class="alert alert-info">
+    <p>Your choice</p>
+    <p>Dictionary: {{ dictName }}</p>
+    <p>Dictonary Type: {{ dictType }}</p>
+</div>
