@@ -14,9 +14,9 @@
   <p *ngIf="loadedDicts.length < 1">No dictionaries available</p>
   <ul class="list-group" *ngIf="loadedDicts.length >= 1">
     <li class="list-group-item" *ngFor="let dict of loadedDicts">
-      <h3>{{ dict.Name }}</h3>
-      <p>Key: {{ dict.Key }}</p>
-      <p>Parent key: {{ dict.ParentKey }}</p>
+      <h3>{{ dict.name }}</h3>
+      <p>Key: {{ dict.key }}</p>
+      <p>Parent key: {{ dict.parent_key }}</p>
     </li>
   </ul>
 </div>

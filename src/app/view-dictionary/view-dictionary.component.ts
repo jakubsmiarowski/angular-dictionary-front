@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import {DictionaryModel} from '../dictionary-model';
 
 @Component({
   selector: 'app-view-dictionary',
@@ -25,21 +26,43 @@ export class ViewDictionaryComponent implements OnInit {
   }
 
   private fetchDict() {
-    this.http
-      .get(`http://localhost:9098/api/dictionary/${this.dictTypeUrl}`)
-      .pipe(map(responseData => {
-        const postsArray = [];
-        for (const key in responseData) {
-          if (responseData.hasOwnProperty(key)) {
-            postsArray.push({ ...responseData[key], id: key } );
+    if (this.dictKey === '') {
+      this.http
+        .get<DictionaryModel>(`http://localhost:9098/api/dictionary/${this.dictTypeUrl}`)
+        .pipe(map(responseData => {
+          const postsArray = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postsArray.push({ ...responseData[key], id: key } );
+            }
           }
-        }
-        return postsArray;
-      }))
-      .subscribe((dictionary) => {
-        console.log(dictionary);
-        this.loadedDicts = dictionary;
-      });
+          return postsArray;
+        }))
+        .subscribe((dictionary) => {
+          console.log(dictionary);
+          this.loadedDicts = dictionary;
+        });
+    }else if (this.dictKey !== '') {
+      this.http
+        .get<DictionaryModel>(`http://localhost:9098/api/dictionary/${this.dictTypeUrl}/${this.dictKey}`)
+        .pipe(map(responseData => {
+          const postsArray = [];
+          /*for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postsArray.push(responseData);
+            }
+          }*/
+          postsArray.push(responseData);
+          console.log(postsArray);
+          return postsArray;
+        }))
+        .subscribe((dictionary: any[]) => {
+          console.log(dictionary);
+          this.loadedDicts = dictionary;
+          console.log(this.loadedDicts);
+        });
+    }
+
   }
 
 }

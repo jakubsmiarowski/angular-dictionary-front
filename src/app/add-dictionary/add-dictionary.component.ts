@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {DictionaryModel} from './dictionary-model';
+import {DictionaryModel} from '../dictionary-model';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
@@ -23,7 +23,7 @@ export class AddDictionaryComponent implements OnInit {
     console.log(dictData);
     console.log(this.dictTypeUrl);
     this.http
-      .post(`http://localhost:9098/api/dictionary/${this.dictTypeUrl}`,
+      .post<DictionaryModel>(`http://localhost:9098/api/dictionary/${this.dictTypeUrl}`,
         dictData
       )
       .subscribe(responseData => {
