@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {DictionaryModel} from './dictionary-model';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-add-dictionary',
@@ -6,10 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-dictionary.component.css']
 })
 export class AddDictionaryComponent implements OnInit {
+  @ViewChild('f', { static: false }) signupForm: NgForm;
+  dictKey = '';
+  dictTypeUrl = '';
+  submitted: false;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+  }
+  onSubmit(dictData: DictionaryModel){
+    this.dictTypeUrl = this.signupForm.value.userData.type;
+    console.log(dictData);
+    console.log(this.dictTypeUrl);
+    this.http
+      .post(`http://localhost:9098/api/dictionary/${this.dictTypeUrl}`,
+        dictData
+      )
+      .subscribe(responseData => {
+        console.log(responseData);
+      });
   }
 
 }

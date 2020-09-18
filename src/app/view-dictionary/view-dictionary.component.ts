@@ -18,8 +18,7 @@ export class ViewDictionaryComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(form: NgForm) {
-    console.log(form);
+  onSubmit() {
     this.dictKey = this.signupForm.value.userData.dictionary;
     this.dictTypeUrl = this.signupForm.value.type;
     this.fetchDict();

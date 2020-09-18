@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+<form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="input-group mb-3" ngModelGroup="userData">
         <input type="text" class="form-control" placeholder="Search by key" name="dictionary" id="dictionary" ngModel />
         <div class="input-group-append">
@@ -15,7 +15,8 @@
   <ul class="list-group" *ngIf="loadedDicts.length >= 1">
     <li class="list-group-item" *ngFor="let dict of loadedDicts">
       <h3>{{ dict.Name }}</h3>
-      <p>{{ dict.Type }}</p>
+      <p>Key: {{ dict.Key }}</p>
+      <p>Parent key: {{ dict.ParentKey }}</p>
     </li>
   </ul>
 </div>
