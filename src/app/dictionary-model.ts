@@ -1,9 +1,9 @@
 export interface DictionaryModel {
-  name: string;
-  key: string;
-  label: string;
-  content: string;
-  parent_key: string;
-  tenant: string;
-  type: string;
+  Name: string;
+  Key: string;
+  Label: string;
+  Content: string;
+  ParentKey: string;
+  Tenant?: string;
+  Type: string;
 }

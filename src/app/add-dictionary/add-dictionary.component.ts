@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {DictionaryModel} from '../dictionary-model';
-import {HttpClient} from '@angular/common/http';
+import {LoadDataService} from '../load-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-dictionary',
@@ -13,22 +13,21 @@ export class AddDictionaryComponent implements OnInit {
   dictKey = '';
   dictTypeUrl = '';
   submitted: false;
+  error = null;
+  private errorSub: Subscription;
 
-  constructor(private http: HttpClient) { }
+  constructor(private loadData: LoadDataService) { }
 
   ngOnInit(): void {
+    this.errorSub = this.loadData.error.subscribe((errorMessage) => {
+      this.error = errorMessage;
+    });
   }
-  onSubmit(dictData: DictionaryModel){
+  onSubmit(dictData){
     this.dictTypeUrl = this.signupForm.value.userData.type;
+    console.log(this.signupForm.value.userData);
     console.log(dictData);
-    console.log(this.dictTypeUrl);
-    this.http
-      .post<DictionaryModel>(`http://localhost:9098/api/dictionary/${this.dictTypeUrl}`,
-        dictData
-      )
-      .subscribe(responseData => {
-        console.log(responseData);
-      });
+    this.loadData.createAndStoreDicts(dictData);
   }
 
 }
