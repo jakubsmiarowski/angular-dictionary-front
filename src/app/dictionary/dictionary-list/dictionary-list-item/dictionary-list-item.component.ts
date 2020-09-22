@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {DictionaryModel} from '../../../dictionary-model';
 
 @Component({
   selector: 'app-dictionary-list-item',
   templateUrl: './dictionary-list-item.component.html',
-  styleUrls: ['./dictionary-list-item.component.css']
 })
-export class DictionaryListItemComponent implements OnInit {
 
-  constructor() { }
+export class DictionaryListItemComponent {
+  @Input() dict: DictionaryModel;
+  @Input() index: number;
 
-  ngOnInit(): void {
-  }
 
 }

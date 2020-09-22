@@ -12,6 +12,8 @@ import { AddEntryComponent } from './add-entry/add-entry.component';
 import { ViewMetaComponent } from './view-meta/view-meta.component';
 import { DictionaryListComponent } from './dictionary/dictionary-list/dictionary-list.component';
 import { DictionaryListItemComponent } from './dictionary/dictionary-list/dictionary-list-item/dictionary-list-item.component';
+import { DictionaryDetailsComponent } from './dictionary/dictionary-details/dictionary-details.component';
+import { DictionaryStartComponent } from './dictionary/dictionary-start/dictionary-start.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { DictionaryListItemComponent } from './dictionary/dictionary-list/dictio
     AddEntryComponent,
     ViewMetaComponent,
     DictionaryListComponent,
+    DictionaryDetailsComponent,
     DictionaryListItemComponent,
+    DictionaryStartComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

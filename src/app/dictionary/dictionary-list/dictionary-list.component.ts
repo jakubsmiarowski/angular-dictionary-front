@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoadDataService } from '../../load-data.service';
+import {DictionaryModel} from '../../dictionary-model';
 
 @Component({
   selector: 'app-dictionaries-list',
@@ -22,7 +23,7 @@ export class DictionaryListComponent implements OnInit {
     this.dictTypeUrl = this.signupForm.value.type;
     this.loadData
       .fetchDicts(this.dictKey, this.dictTypeUrl)
-      .subscribe((dictionary: any[]) => {
+      .subscribe((dictionary: DictionaryModel[]) => {
         this.loadedDicts = dictionary;
       });
   }

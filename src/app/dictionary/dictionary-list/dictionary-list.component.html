@@ -13,12 +13,7 @@
 </form>
 <div>
     <p *ngIf="loadedDicts.length < 1">No dictionaries available</p>
-    <ul class="list-group" *ngIf="loadedDicts.length >= 1">
-        <li class="list-group-item" *ngFor="let dict of loadedDicts">
-            <h3>{{ dict.Name }}</h3>
-            <p>Key: {{ dict.Key }}</p>
-            <p>Parent key: {{ dict.ParentKey }}</p>
-            <p>{{ dict.Content }}</p>
-        </li>
-    </ul>
+    <div class="list-group" *ngIf="loadedDicts.length >= 1">
+        <app-dictionary-list-item *ngFor="let dictionary of loadedDicts; let i = index" [dict]="dictionary" [index]="i"></app-dictionary-list-item>
+    </div>
 </div>

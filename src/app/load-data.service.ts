@@ -10,13 +10,21 @@ import { Subject, throwError } from "rxjs";
 })
 export class LoadDataService {
   error = new Subject<string>();
+  private dictionaries: DictionaryModel[] = [];
 
   constructor(private http: HttpClient) { }
+
+  getDictionary(index: number) {
+    return this.dictionaries[index];
+  }
+  getDictionaries() {
+    this.dictionaries.slice();
+  }
 
   fetchDicts(key: string, type: string) {
     if (key === '') {
       return this.http
-        .get(`http://localhost:9098/api/dictionary/${type}`)
+        .get<DictionaryModel[]>(`http://localhost:9098/api/dictionary/${type}`)
         .pipe(map(responseData => {
           const postsArray: DictionaryModel[] = [];
           for (const key in responseData) {
@@ -29,10 +37,10 @@ export class LoadDataService {
         }));
     }else if (key !== '') {
       return this.http
-        .get<DictionaryModel>(`http://localhost:9098/api/dictionary/${type}/${key}`)
+        .get/*<DictionaryModel[]>*/(`http://localhost:9098/api/dictionary/${type}/${key}`)
         .pipe(map(responseData => {
           console.log(responseData);
-          const postsArray: DictionaryModel[] = [];
+          const postsArray/*: DictionaryModel[]*/ = [];
           /*for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
               postsArray.push(responseData);
@@ -45,7 +53,7 @@ export class LoadDataService {
   }
   createAndStoreDicts(data: DictionaryModel) {
     this.http
-      .post<DictionaryModel>('http://localhost:9098/api/dictionary',
+      .post/*<DictionaryModel[]>*/('http://localhost:9098/api/dictionary',
         data
       )
       .subscribe(responseData => {
