@@ -26,8 +26,8 @@ export class AddDictionaryComponent implements OnInit {
   onSubmit(dictData){
     this.dictTypeUrl = this.signupForm.value.userData.type;
     console.log(this.signupForm.value.userData);
-    console.log(dictData);
-    this.loadData.createAndStoreDicts(dictData);
+    /*console.log(dictData);*/
+    this.loadData.createAndStoreDicts(this.signupForm.value.userData);
   }
 
 }

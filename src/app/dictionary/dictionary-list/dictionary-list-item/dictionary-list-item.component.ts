@@ -7,8 +7,8 @@ import {DictionaryModel} from '../../../dictionary-model';
 })
 
 export class DictionaryListItemComponent {
-  @Input() dict: DictionaryModel;
-  @Input() index: number;
+  @Input() dict;
+  @Input() isSearchedByKey = false;
 
 
 }

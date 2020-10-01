@@ -13,18 +13,42 @@ export class DictionaryListComponent implements OnInit {
   dictKey = '';
   dictTypeUrl = '';
   loadedDicts = [];
+  loadedMeta = [];
+  searchedByKey: boolean;
 
   constructor(private loadData: LoadDataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onFetchMeta();
+  }
 
   onSubmit() {
-    this.dictKey = this.signupForm.value.userData.dictionary;
+    this.dictKey = this.signupForm.value.userData.key;
     this.dictTypeUrl = this.signupForm.value.type;
+    if (this.dictKey === ''){
+      this.searchedByKey = false;
+      this.loadData
+        .fetchDicts(this.dictKey, this.dictTypeUrl)
+        .subscribe((dictionary: DictionaryModel[]) => {
+          this.loadedDicts = dictionary;
+        });
+    }else if (this.dictKey !== '') {
+      this.searchedByKey = true;
+      this.loadData
+        .fetchDicts(this.dictKey, this.dictTypeUrl)
+        .subscribe((dictionary: DictionaryModel[]) => {
+          console.log(dictionary);
+          this.loadedDicts = dictionary;
+        });
+    }
+  }
+
+  onFetchMeta(){
     this.loadData
-      .fetchDicts(this.dictKey, this.dictTypeUrl)
-      .subscribe((dictionary: DictionaryModel[]) => {
-        this.loadedDicts = dictionary;
+      .fetchMeta()
+      .subscribe(meta => {
+        console.log(meta);
+        this.loadedMeta = meta;
       });
   }
 }

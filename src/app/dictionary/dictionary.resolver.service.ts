@@ -11,7 +11,7 @@ export class DictionaryResolverService {
   constructor(private loadData: LoadDataService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+/*  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.loadData.getDictionaries();
-  }
+  }*/
 }

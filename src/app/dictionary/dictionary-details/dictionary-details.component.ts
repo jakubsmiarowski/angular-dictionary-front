@@ -20,9 +20,9 @@ export class DictionaryDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    /*this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.dictionary = this.loadData.getDictionary(this.id);
-    });
+    });*/
   }
 }

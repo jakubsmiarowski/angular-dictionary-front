@@ -1,18 +1,23 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
   <div class="input-group mb-3" ngModelGroup="userData">
       <input type="text" class="form-control" placeholder="Name" name="name" id="name" ngModel required/>
-      <input type="text" class="form-control" placeholder="Label" name="label" id="label" ngModel required/>
+<!--      <input type="text" class="form-control" placeholder="Label" name="label" id="label" ngModel/>-->
   </div>
   <div class="input-group mb-3" ngModelGroup="userData">
     <input type="text" class="form-control" placeholder="Key" name="key" id="key" ngModel required/>
-    <input type="text" class="form-control" placeholder="Parent Key" name="parent_key" id="parent_key" ngModel required/>
-    <input type="text" class="form-control" placeholder="Tenant" name="tenant" id="tenant" ngModel required/>
+    <input type="text" class="form-control" placeholder="Parent Key" name="parent_key" id="parent_key" ngModel/>
+    <!--<input type="text" class="form-control" placeholder="Tenant" name="tenant" id="tenant" ngModel/>-->
   </div>
-  <textarea ngModelGroup="userData" cols="4" type="text" class="form-control" placeholder="Content" name="content" id="content" ngModel required></textarea>
+<!--
+  <textarea ngModelGroup="userData" cols="4" type="text" class="form-control" placeholder="Content" name="content" id="content" ngModel></textarea>
+-->
   <label for="Type">Select Type</label>
   <div ngModelGroup="userData">
     <select id="type" class="form-control" name="type" ngModel required>
-      <option value="DictionaryAbsenceType">AbsenceType</option>
+      <option value="DictionaryAbsenceType">DictionaryAbsenceType</option>
+      <option value="AbsenceType">AbsenceType</option>
+      <option value="Countries">Countries</option>
+      <option value="Cities">Cities</option>
     </select>
   </div>
 </form>

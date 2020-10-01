@@ -1,1 +1,9 @@
-<p>add-entry works!</p>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+  <div class="input-group mb-3" ngModelGroup="userData">
+    <input type="text" class="form-control" placeholder="Add Title" name="title" id="title" ngModel />
+    <input type="text" class="form-control" placeholder="Add Type" name="type" id="type" ngModel />
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">Add</button>
+    </div>
+  </div>
+</form>

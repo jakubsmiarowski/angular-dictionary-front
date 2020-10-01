@@ -10,50 +10,39 @@ import { Subject, throwError } from "rxjs";
 })
 export class LoadDataService {
   error = new Subject<string>();
-  private dictionaries: DictionaryModel[] = [];
 
   constructor(private http: HttpClient) { }
 
-  getDictionary(index: number) {
-    return this.dictionaries[index];
-  }
-  getDictionaries() {
-    this.dictionaries.slice();
-  }
+
 
   fetchDicts(key: string, type: string) {
     if (key === '') {
       return this.http
         .get<DictionaryModel[]>(`http://localhost:9098/api/dictionary/${type}`)
         .pipe(map(responseData => {
-          const postsArray: DictionaryModel[] = [];
+          const dictArray: DictionaryModel[] = [];
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
-              postsArray.push( responseData[key]  );
+              dictArray.push( responseData[key]  );
             }
           }
-          console.log(postsArray);
-          return postsArray;
+          console.log(dictArray);
+          return dictArray;
         }));
     }else if (key !== '') {
       return this.http
-        .get/*<DictionaryModel[]>*/(`http://localhost:9098/api/dictionary/${type}/${key}`)
+        .get(`http://localhost:9098/api/dictionary/${type}/${key}`)
         .pipe(map(responseData => {
           console.log(responseData);
-          const postsArray/*: DictionaryModel[]*/ = [];
-          /*for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              postsArray.push(responseData);
-            }
-          }*/
-          postsArray.push(responseData);
-          return postsArray;
+          const dictArray = [];
+          dictArray.push(responseData);
+          return dictArray;
         }));
     }
   }
   createAndStoreDicts(data: DictionaryModel) {
     this.http
-      .post/*<DictionaryModel[]>*/('http://localhost:9098/api/dictionary',
+      .post<DictionaryModel[]>('http://localhost:9098/api/dictionary',
         data
       )
       .subscribe(responseData => {
@@ -62,5 +51,24 @@ export class LoadDataService {
         console.log(error);
         this.error.next(error.error.error_description);
       });
+  }
+  createMeta(metaData) {
+    this.http
+      .post('http://localhost:9098/api/metadata', metaData)
+      .subscribe(responseData => {
+        console.log(responseData);
+      }, error => {
+        console.log(error);
+      });
+  }
+  fetchMeta() {
+    return this.http
+      .get('http://localhost:9098/api/metadata')
+      .pipe(map(responseData => {
+        console.log(responseData);
+        const postsArray = [];
+        postsArray.push(responseData);
+        return postsArray;
+      }));
   }
 }

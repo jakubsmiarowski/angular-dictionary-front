@@ -1,5 +1,12 @@
-<a style="cursor: pointer" class="list-group-item clearfix" [routerLink]="[index]" routerLinkActive="active">
+<a *ngIf="isSearchedByKey === true" style="cursor: pointer" class="list-group-item clearfix">
   <div class="pull-left">
     <h5 class="list-group-item-heading">{{ dict.name }}</h5>
+    <p>Key: {{ dict.key }}</p>
+  </div>
+</a>
+<a *ngIf="isSearchedByKey === false" style="cursor: pointer" class="list-group-item clearfix">
+  <div class="pull-left">
+    <h5 class="list-group-item-heading">{{ dict.Name }}</h5>
+    <p>Key: {{ dict.Key }}</p>
   </div>
 </a>
